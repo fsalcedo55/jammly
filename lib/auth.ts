@@ -13,7 +13,18 @@ export const validateRoute = (handler) => {
         user = await prisma.user.findUnique({
           where: { id },
         });
-      } catch {}
+        if (!user) {
+          throw new Error("Not real user");
+        }
+      } catch (error) {
+        res.status(401);
+        res.json({ error: "Not Authorized" });
+        return;
+      }
+      return handler(req, res, user);
     }
+
+    res.status(401);
+    res.json({ error: "Not Authorized" });
   };
 };
