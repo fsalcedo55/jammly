@@ -4,7 +4,7 @@ import prisma from "./prisma";
 
 export const validateRoute = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
-    const { TRAX_ACCESS_TOKEN: token } = req.cookies;
+    const { JAMMLY_ACCESS_TOKEN: token } = req.cookies;
     if (token) {
       let user;
 
